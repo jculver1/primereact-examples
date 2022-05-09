@@ -68,9 +68,11 @@ function App() {
     }
 
     const saveProduct = () => {
+        console.log(submitted, 'is this working')
         setSubmitted(true);
-
+        // console.log(products, 'prod ucts', product.name, product)
         if (product.name.trim()) {
+            console.log('products', products)
             let _products = [...products];
             let _product = {...product};
             if (product.id) {
@@ -189,7 +191,7 @@ function App() {
         return (
             <React.Fragment>
                 <Button icon="pi pi-pencil" className="p-button-rounded p-button-success mr-2" onClick={() => editProduct(rowData)} />
-                <Button icon="pi pi-trash" className="p-button-rounded p-button-danger" onClick={() => confirmDeleteProduct(rowData)} />
+                <Button icon="pi pi-trash" data-testid="delete-row" className="p-button-rounded p-button-danger" onClick={() => confirmDeleteProduct(rowData)} />
             </React.Fragment>
         );
     }
@@ -201,7 +203,7 @@ function App() {
                 <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Search..." className="w-full lg:w-auto" />
             </span>
             <div className="mt-3 md:mt-0 flex justify-content-end">
-                <Button icon="pi pi-plus" className="mr-2 p-button-rounded" onClick={openNew} tooltip="New" tooltipOptions={{position: 'bottom'}} />
+                <Button icon="pi pi-plus" className="mr-2 p-button-rounded" onClick={openNew} tooltip="New" tooltipOptions={{position: 'bottom'}} aria-label='add-new-product'/>
                 <Button icon="pi pi-trash" className="p-button-danger mr-2 p-button-rounded" onClick={confirmDeleteSelected} disabled={!selectedProducts || !selectedProducts.length} tooltip="Delete" tooltipOptions={{position: 'bottom'}} />
                 <Button icon="pi pi-upload" className="p-button-help p-button-rounded" onClick={exportCSV} tooltip="Export" tooltipOptions={{position: 'bottom'}} />
             </div>
@@ -210,7 +212,7 @@ function App() {
     const productDialogFooter = (
         <React.Fragment>
             <Button label="Cancel" icon="pi pi-times" className="p-button-text" onClick={hideDialog} />
-            <Button label="Save" icon="pi pi-check" onClick={saveProduct} />
+            <Button label="Save" aria-label='save' icon="pi pi-check" onClick={saveProduct} />
         </React.Fragment>
     );
 
@@ -254,7 +256,7 @@ function App() {
                 {product.image && <img src={`demo/images/product/${product.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={product.image} className="block mt-0 mx-auto mb-5 w-20rem shadow-2" />}
                 <div className="field">
                     <label htmlFor="name">Name</label>
-                    <InputText id="name" value={product.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !product.name })} />
+                    <InputText aria-label="Product Name" id="name" value={product.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !product.name })} />
                     {submitted && !product.name && <small className="p-error">Name is required.</small>}
                 </div>
                 <div className="field">
@@ -287,7 +289,7 @@ function App() {
                 <div className="formgrid grid">
                     <div className="field col">
                         <label htmlFor="price">Price</label>
-                        <InputNumber id="price" value={product.price} onValueChange={(e) => onInputNumberChange(e, 'price')} mode="currency" currency="USD" locale="en-US" />
+                        <InputNumber id="price" value={product.price} onValueChange={(e) => onInputNumberChange(e, 'price')} mode="currency" currency="USD" locale="en-US" aria-label="price" />
                     </div>
                     <div className="field col">
                         <label htmlFor="quantity">Quantity</label>
