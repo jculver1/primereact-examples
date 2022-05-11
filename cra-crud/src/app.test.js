@@ -1,16 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
 import {findByText, getByText, render, screen, waitFor, within} from "@testing-library/react";
 import App from './App'
 import userEvent from "@testing-library/user-event";
-import * as products from '../public/demo/data/products.json'
-import { DataTable } from 'primereact/datatable';
-import { getProducts } from './ProductService';
-// import axios from 'axios';
-
-// jest.mock('axios');
 
 test("Add a new product to the table", async () => {
-  // axios.get.mockResolvedValue({ products: getProducts.data });
 
   render(<App/>);
 
@@ -22,7 +14,7 @@ test("Add a new product to the table", async () => {
     userEvent.click(addProductButton);
 
   //show modal is open
-    expect(screen.getByText("Product Details")).toBeInTheDocument();
+    // expect(screen.getByText("Product Details")).toBeInTheDocument();
 
     const inputFieldProdName = screen.getByLabelText('Name', {selector: 'input'});
     userEvent.type(inputFieldProdName, "A Test Name");
@@ -35,22 +27,22 @@ test("Add a new product to the table", async () => {
     
        
     const saveAddProduct = screen.getByRole("button", {
-        name: "Cancel",
+        name: "Save",
       });
 
     userEvent.click(saveAddProduct);
    
 });
 
+
 test("Delete a product from table", async () => {
+ 
+  render(<App/>);
 
-  // axios.get.mockResolvedValue({ products: getProducts.data });
- render(<App  />);
-
-
- const bambooWatch = await waitFor(() => screen.getByText("Bamboo Watch")); 
- expect(userList).toBeInTheDocument();
-
+  const products = await screen.findAllByRole('row')
+  console.log(products.length, 'what is the length now?')
+  const numberOfRowsAfterDelete = products.length - 1;
+  
  
 });
 
@@ -88,6 +80,7 @@ test("Delete a product from table", async () => {
 //   userEvent.click(cherriesCheckbox);
 
 //   // find and click order summary button
+
 //   const orderSummaryButton = screen.getByRole("button", {
 //     name: /order sundae/i,
 //   });

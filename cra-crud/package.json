@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@testing-library/user-event": "^12.8.3",
+    "axios": "^0.27.2",
     "msw": "^0.39.2",
     "primeflex": "^3.1.0",
     "primeicons": "^4.1.0",
@@ -42,7 +43,6 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^11.2.7",
     "@types/jest": "^27.5.0",
-    "jest": "^28.0.3",
     "prettier": "^2.6.2"
   }
 }
