@@ -53,5 +53,10 @@ test("Delete a product from table", async () => {
   userEvent.click(confirmDelete)
 
   expect((await screen.findAllByRole('row')).length === numberOfRowsAfterDelete)
+});
 
+
+test("test crud app with snapshot testing", () => {
+  const app = render(<App/>);
+  expect(app).toMatchSnapshot()
 });
